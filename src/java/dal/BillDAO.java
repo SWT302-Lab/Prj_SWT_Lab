@@ -20,8 +20,7 @@ public class BillDAO extends DBContext {
                      VALUES 
                          (?, ?, ?, ?)
                      """;
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
+         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setInt(1, bill.getTableId());
             st.setInt(2, bill.getDishId());
             st.setInt(3, bill.getQuantity());
