@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Account;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +19,7 @@ import model.Account;
  */
 public class AccountDAO extends DBContext {
 
+    private static final Logger LOGGER = Logger.getLogger(AccountDAO.class.getName());
     public String getAccount(String username, String password) {
         String sql = "SELECT role FROM Account WHERE username = ? AND password = ?";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
@@ -28,7 +31,7 @@ public class AccountDAO extends DBContext {
             }
         }
         } catch (SQLException e) {
-            System.out.println(e);
+            LOGGER.log(Level.SEVERE, "Database error while fetching account role", e);
         }
         return null;
     }
