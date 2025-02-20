@@ -7,6 +7,8 @@ package dal;
 import model.Bill;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,6 +16,7 @@ import java.sql.SQLException;
  */
 public class BillDAO extends DBContext {
 
+    private static final Logger LOGGER = Logger.getLogger(BillDAO.class.getName());
     public void inserToBill(Bill bill) {
         String sql = """
                      INSERT INTO Bill (TableID, DishID, Quantity, Price)
@@ -27,6 +30,7 @@ public class BillDAO extends DBContext {
             st.setInt(4, bill.getPrice());
             st.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error inserting bill into database", e);
         }
     }
 }
