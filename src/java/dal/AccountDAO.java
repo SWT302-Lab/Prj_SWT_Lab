@@ -19,8 +19,7 @@ public class AccountDAO extends DBContext {
 
     public String getAccount(String username, String password) {
         String sql = "SELECT role FROM Account WHERE username = ? AND password = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, username);
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
