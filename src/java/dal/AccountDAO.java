@@ -22,11 +22,11 @@ public class AccountDAO extends DBContext {
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, username);
             st.setString(2, password);
-            ResultSet rs = st.executeQuery();
+            try (ResultSet rs = st.executeQuery()) {
             if (rs.next()) {
-                String role = rs.getString("role");
-                return role;
+                return rs.getString("role");
             }
+        }
         } catch (SQLException e) {
             System.out.println(e);
         }
