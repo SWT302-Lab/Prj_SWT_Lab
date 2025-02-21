@@ -67,6 +67,7 @@ public class AddItem extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         throw new UnsupportedOperationException("doGet function is not supported");
+        //hoichamto
     }
 
     /**
